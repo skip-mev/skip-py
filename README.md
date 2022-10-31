@@ -1,4 +1,4 @@
-A helper library to sign and send bundles to the Skip Relay.
+A helper library to sign and send bundles to the Skip Relay in Python.
 
 PyPi: https://pypi.org/project/skip-python/0.1.0/
 
@@ -43,7 +43,15 @@ Import the package with:
 import skip
 ```
 
-Alternatively, you can import specific functions to use:
+Alternatively, you can import specific functions to use like so:
 ```bash
 from skip import sign_bundle, send_bundle, sign_and_send_bundle
 ```
+
+This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
+
+## sign_bundle
+
+## send_bundle
+
+## sign_and_send_bundle
