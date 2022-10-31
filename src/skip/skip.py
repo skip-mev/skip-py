@@ -7,6 +7,17 @@ from cosmpy.crypto.keypairs import PrivateKey
 
 def sign_bundle(bundle: list[bytes], 
                 private_key: bytes) -> tuple[list[str], bytes]:
+    """Signs a bundle of transactions and returns the signed bundle and the signature.
+
+    Args:
+        bundle (list[bytes]): A list of transaction bytes to sign. 
+        The list of transaction must be in the order as the desired bundle.
+        Transaction bytes can be obtained from mempool txs (tx) by applying base64.b64decode(tx)
+        private_key (bytes): The private key to sign the bundle with in bytes.
+
+    Returns:
+        tuple[list[str], bytes]: A tuple of the signed bundle and the signature.
+    """
     
     # Create digest of flattened bundle
     bundle_digest = sha256(b''.join(bundle)).digest()
@@ -30,6 +41,20 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
                 rpc_url: str, 
                 desired_height: int,
                 sync: bool) -> httpx.Response:
+    """Sends a signed bundle to the Skip Relay.
+
+    Args:
+        b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
+        bundle_signature (bytes): The signature applied to the bundle.
+        public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+        rpc_url (str): The URL of the Skip Relay RPC.
+        desired_height (int): The desired height for the bundle to be included in. 
+        Height of 0 can be used to include the bundle in the next block.
+        sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+    Returns:
+        httpx.Response: The response from the Skip Relay.
+    """
     
     # Choose broadcast method based on sync boolean
     if sync:
@@ -59,6 +84,19 @@ def sign_and_send_bundle(bundle: list[bytes],
                          rpc_url: str, 
                          desired_height: int,
                          sync: bool) -> str:
+    """Signs and sends a bundle to the Skip Relay.
+
+    Args:
+        bundle (list[bytes]): A list of transaction bytes to sign.
+        private_key (bytes): The private key to sign the bundle with in bytes.
+        public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+        rpc_url (str): The URL of the Skip Relay RPC.
+        desired_height (int): The desired height for the bundle to be included in.
+        sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+    Returns:
+        str: The response from the Skip Relay.
+    """
     
     # Sign bundle
     b64_encoded_signed_bundle, bundle_signature = sign_bundle(bundle, private_key)
