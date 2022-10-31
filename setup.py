@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -16,9 +16,10 @@ setup(
     description = ("A helper library to sign and send bundles to the Skip Relay in Python."),
     license = "MIT",
     url = "http://packages.python.org/an_example_pypi_project",
-    packages=['skip'],
-    requires=["setuptools>=61.0", "cosmpy>=0.6.0", "httpx>=0.23.0"],
-    long_description=read('README'),
+    package_dir={'':"src"},
+    packages=find_packages("src"),
+    install_requires=["setuptools>=61.0", "cosmpy>=0.6.0", "httpx>=0.23.0"],
+    long_description=read('README.md'),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
