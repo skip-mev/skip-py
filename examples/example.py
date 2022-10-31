@@ -11,7 +11,7 @@ from cosmpy.protos.cosmos.base.v1beta1.coin_pb2 import Coin
 
 # EDIT VARIABLES - Default values are for Juno Mainnet
 GRPC_URL  = "grpc+https://juno-grpc.lavenderfive.com:443/"
-SKIP_RPC_URL = "http://uni-5-sentinel.skip.money:26657/"
+SKIP_RPC_URL = "http://juno-1-api.skip.money:26657/"
 ADDRESS_PREFIX = "juno"
 
 # REQUIRES YOUR OWN MNEMONIC TO BE SET
