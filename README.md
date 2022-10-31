@@ -51,7 +51,7 @@ wallet = LocalWallet(PrivateKey('<base64 encoded private key>'), prefix="juno")
 response = skip.sign_and_send_bundle(bundle=[tx_bytes], 
                                      private_key=wallet.signer().private_key_bytes,
                                      public_key=wallet.signer().public_key,
-                                     rpc_url="http://juno-1-api.skip.money:26657/",
+                                     rpc_url="http://juno-1-api.skip.money/",
                                      desired_height=0,
                                      sync=True)
 ```
