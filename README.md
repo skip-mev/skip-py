@@ -36,20 +36,6 @@ git clone https://github.com/skip-mev/skip-py.git
 
 After cloning, you can move the skip folder into your respective development repo and import the helper library.
 
-## Usage
-
-Import the package with:
-``` python
-import skip
-```
-
-Alternatively, you can import specific functions to use like so:
-``` python
-from skip import sign_bundle, send_bundle, sign_and_send_bundle
-```
-
-This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
-
 ## Example Usage
 
 ``` python
@@ -71,6 +57,20 @@ response = skip.sign_and_send_bundle(bundle=[tx_bytes],
 ```
 For a more detailed/runnable example, check out: 
 https://github.com/skip-mev/skip-py/blob/main/examples/example.py
+
+## Detailed Usage
+
+Import the package with:
+``` python
+import skip
+```
+
+Alternatively, you can import specific functions to use like so:
+``` python
+from skip import sign_bundle, send_bundle, sign_and_send_bundle
+```
+
+This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
 
 ## sign_bundle
 
