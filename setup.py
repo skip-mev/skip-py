@@ -9,8 +9,8 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name = "skip-py",
-    version = "0.1.3",
+    name = "skip-python",
+    version = "0.1.0",
     author = "Jeremy Liu",
     author_email = "jeremy@skip.money",
     description = ("A helper library to sign and send bundles to the Skip Relay in Python."),

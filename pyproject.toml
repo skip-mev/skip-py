@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0", "cosmpy>=0.6.0", "httpx>=0.23.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "skip_py"
-version = "0.1.2"
+name = "skip-python"
+version = "0.1.0"
 authors = [
   { name="Skip Protocol", email="jeremy@skip.money" },
 ]
