@@ -70,8 +70,53 @@ sign_and_send_bundle(bundle: list[bytes],
 
 ## sign_bundle
 
-`sign_bundle` is used to sign a bundle of transactions to submit to the Skip Relay. 
+`sign_bundle` Signs a bundle of transactions and returns the signed bundle and the signature.
+
+```
+Args:
+    bundle (list[bytes]): A list of transaction bytes to sign. 
+        The list of transaction must be in the order as the desired bundle.
+        Transaction bytes can be obtained from mempool txs (tx) by applying base64.b64decode(tx)
+    private_key (bytes): The private key to sign the bundle with in bytes.
+
+Returns:
+    tuple[list[str], bytes]: A tuple of the signed bundle and the signature.
+```
 
 ## send_bundle
 
+`send_bundle` Sends a signed bundle to the Skip Relay.
+
+```
+Args:
+    b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
+        The list of transaction must be in the order as the desired bundle.
+    bundle_signature (bytes): The signature applied to the bundle.
+    public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+    rpc_url (str): The URL of the Skip Relay RPC.
+    desired_height (int): The desired height for the bundle to be included in. 
+        Height of 0 can be used to include the bundle in the next block.
+    sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+Returns:
+    httpx.Response: The response from the Skip Relay.
+```
+
 ## sign_and_send_bundle
+
+`sign_and_send_bundle` Signs and sends a bundle to the Skip Relay (a wrapper function combining sign_bundle and send_bundle)
+
+```
+Args:
+    bundle (list[bytes]): A list of transaction bytes to sign.
+        The list of transaction must be in the order as the desired bundle.
+        Transaction bytes can be obtained from mempool txs (tx) by applying base64.b64decode(tx)
+    private_key (bytes): The private key to sign the bundle with in bytes.
+    public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+    rpc_url (str): The URL of the Skip Relay RPC.
+    desired_height (int): The desired height for the bundle to be included in.
+    sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+Returns:
+    str: The response from the Skip Relay.
+```
