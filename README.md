@@ -50,29 +50,13 @@ from skip import sign_bundle, send_bundle, sign_and_send_bundle
 
 This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
 
-```
-sign_bundle(bundle: list[bytes], private_key: bytes) -> tuple[list[str], bytes]
-
-send_bundle(b64_encoded_signed_bundle: list[str], 
-            bundle_signature: bytes, 
-            public_key: str, 
-            rpc_url: str, 
-            desired_height: int, 
-            sync: bool) -> httpx.Response
-
-sign_and_send_bundle(bundle: list[bytes], 
-                     private_key: bytes, 
-                     public_key: str, 
-                     rpc_url: str, 
-                     desired_height: int,
-                     sync: bool) -> httpx.Response
-```
-
 ## sign_bundle
 
 `sign_bundle` Signs a bundle of transactions and returns the signed bundle and the signature.
 
 ```
+sign_bundle(bundle: list[bytes], private_key: bytes) -> tuple[list[str], bytes]
+
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign. 
         The list of transaction must be in the order as the desired bundle.
@@ -88,6 +72,13 @@ Returns:
 `send_bundle` Sends a signed bundle to the Skip Relay.
 
 ```
+send_bundle(b64_encoded_signed_bundle: list[str], 
+            bundle_signature: bytes, 
+            public_key: str, 
+            rpc_url: str, 
+            desired_height: int, 
+            sync: bool) -> httpx.Response
+
 Args:
     b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
         The list of transaction must be in the order as the desired bundle.
@@ -107,6 +98,13 @@ Returns:
 `sign_and_send_bundle` Signs and sends a bundle to the Skip Relay (a wrapper function combining sign_bundle and send_bundle)
 
 ```
+sign_and_send_bundle(bundle: list[bytes], 
+                     private_key: bytes, 
+                     public_key: str, 
+                     rpc_url: str, 
+                     desired_height: int,
+                     sync: bool) -> httpx.Response
+
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign.
         The list of transaction must be in the order as the desired bundle.
