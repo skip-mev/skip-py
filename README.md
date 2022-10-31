@@ -120,7 +120,7 @@ Returns:
 
 ## sign_and_send_bundle
 
-`sign_and_send_bundle` Signs and sends a bundle to the Skip Relay (a wrapper function combining sign_bundle and send_bundle)
+`sign_and_send_bundle` Signs and sends a bundle to the Skip Relay (a wrapper function combining sign_bundle and send_bundle).
 
 ``` python
 sign_and_send_bundle(bundle: list[bytes], 
