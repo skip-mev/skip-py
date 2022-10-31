@@ -34,3 +34,16 @@ pip install skip-python
 git clone https://github.com/skip-mev/skip-py.git
 ```
 
+After cloning, you can move the skip folder into your respective development repo and import the helper library.
+
+## Usage
+
+Import the package with:
+```bash
+import skip
+```
+
+Alternatively, you can import specific functions to use:
+```bash
+from skip import sign_bundle, send_bundle, sign_and_send_bundle
+```
