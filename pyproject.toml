@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skip_py"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
   { name="Skip Protocol", email="jeremy@skip.money" },
 ]
-description = "A helper library to sign and send bundles to the Skip Relay."
+description = "A helper library to sign and send bundles to the Skip Relay in Python."
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
