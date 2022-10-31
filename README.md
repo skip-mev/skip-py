@@ -39,12 +39,12 @@ After cloning, you can move the skip folder into your respective development rep
 ## Usage
 
 Import the package with:
-```bash
+``` python
 import skip
 ```
 
 Alternatively, you can import specific functions to use like so:
-```bash
+``` python
 from skip import sign_bundle, send_bundle, sign_and_send_bundle
 ```
 
@@ -54,7 +54,7 @@ This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `
 
 `sign_bundle` Signs a bundle of transactions and returns the signed bundle and the signature.
 
-```
+``` python
 sign_bundle(bundle: list[bytes], private_key: bytes) -> tuple[list[str], bytes]
 
 Args:
@@ -71,7 +71,7 @@ Returns:
 
 `send_bundle` Sends a signed bundle to the Skip Relay.
 
-```
+``` python
 send_bundle(b64_encoded_signed_bundle: list[str], 
             bundle_signature: bytes, 
             public_key: str, 
@@ -97,7 +97,7 @@ Returns:
 
 `sign_and_send_bundle` Signs and sends a bundle to the Skip Relay (a wrapper function combining sign_bundle and send_bundle)
 
-```
+``` python
 sign_and_send_bundle(bundle: list[bytes], 
                      private_key: bytes, 
                      public_key: str, 
@@ -118,3 +118,6 @@ Args:
 Returns:
     str: The response from the Skip Relay.
 ```
+
+## Example Usage
+
