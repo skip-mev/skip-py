@@ -55,7 +55,7 @@ response = skip.sign_and_send_bundle(bundle=[tx_bytes],
                                      desired_height=0,
                                      sync=True)
 ```
-For a more detailed/runnable example, check out: 
+For a more detailed/runnable example, check out: \n
 https://github.com/skip-mev/skip-py/blob/main/examples/example.py
 
 ## Detailed Usage
