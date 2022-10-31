@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: skip-py
+Version: 0.1.0
+Summary: A helper library to sign and send bundles to the Skip Relay.
+Author-email: Skip Protocol <jeremy@skip.money>
+Project-URL: Homepage, https://github.com/skip-mev/skip-py
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+
+A helper library to sign and send bundles to the Skip Relay.
