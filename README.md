@@ -50,7 +50,25 @@ from skip import sign_bundle, send_bundle, sign_and_send_bundle
 
 This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
 
+```
+sign_bundle(bundle: list[bytes], private_key: bytes) -> tuple[list[str], bytes]
+send_bundle(b64_encoded_signed_bundle: list[str], 
+            bundle_signature: bytes, 
+            public_key: str, 
+            rpc_url: str, 
+            desired_height: int, 
+            sync: bool) -> httpx.Response
+sign_and_send_bundle(bundle: list[bytes], 
+                     private_key: bytes, 
+                     public_key: str, 
+                     rpc_url: str, 
+                     desired_height: int,
+                     sync: bool) -> httpx.Response
+```
+
 ## sign_bundle
+
+`sign_bundle` is used to sign a bundle of transactions to submit to the Skip Relay. 
 
 ## send_bundle
 
