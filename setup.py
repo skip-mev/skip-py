@@ -10,7 +10,7 @@ def read(fname):
 
 setup(
     name = "skip-py",
-    version = "0.1.2",
+    version = "0.1.3",
     author = "Jeremy Liu",
     author_email = "jeremy@skip.money",
     description = ("A helper library to sign and send bundles to the Skip Relay in Python."),
