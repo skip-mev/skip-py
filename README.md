@@ -56,7 +56,7 @@ This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `
 
 ``` python
 sign_bundle(bundle: list[bytes], private_key: bytes) -> tuple[list[str], bytes]
-
+"""
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign. 
         The list of transaction must be in the order as the desired bundle.
@@ -65,6 +65,7 @@ Args:
 
 Returns:
     tuple[list[str], bytes]: A tuple of the signed bundle and the signature.
+"""
 ```
 
 ## send_bundle
@@ -78,7 +79,7 @@ send_bundle(b64_encoded_signed_bundle: list[str],
             rpc_url: str, 
             desired_height: int, 
             sync: bool) -> httpx.Response
-
+"""
 Args:
     b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
         The list of transaction must be in the order as the desired bundle.
@@ -91,6 +92,7 @@ Args:
 
 Returns:
     httpx.Response: The response from the Skip Relay.
+"""
 ```
 
 ## sign_and_send_bundle
@@ -104,7 +106,7 @@ sign_and_send_bundle(bundle: list[bytes],
                      rpc_url: str, 
                      desired_height: int,
                      sync: bool) -> httpx.Response
-
+"""
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign.
         The list of transaction must be in the order as the desired bundle.
@@ -117,6 +119,7 @@ Args:
 
 Returns:
     str: The response from the Skip Relay.
+"""
 ```
 
 ## Example Usage
