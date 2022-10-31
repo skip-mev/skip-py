@@ -23,13 +23,13 @@ There are 2 ways to use skip-python: `pip`, or `git clone`.
 
 ### via `pip`
 
-''' bash
+```bash
 pip install skip-python
-'''
+```
 
 ### via 'git clone'
 
-''' bash
+``` bash
 git clone https://github.com/skip-mev/skip-py.git
-'''
+```
 
