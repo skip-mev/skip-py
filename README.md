@@ -1,6 +1,7 @@
 A helper library to sign and send bundles to the Skip Relay.
 
 PyPi: https://pypi.org/project/skip-python/0.1.0/
+
 Github: https://github.com/skip-mev/skip-py
 
 # Quick Start
@@ -27,7 +28,7 @@ There are 2 ways to use skip-python: `pip`, or `git clone`.
 pip install skip-python
 ```
 
-### via 'git clone'
+### via `git clone`
 
 ``` bash
 git clone https://github.com/skip-mev/skip-py.git
