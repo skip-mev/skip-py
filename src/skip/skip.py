@@ -84,7 +84,7 @@ def sign_and_send_bundle(bundle: list[bytes],
                          public_key: str, 
                          rpc_url: str, 
                          desired_height: int,
-                         sync: bool) -> str:
+                         sync: bool) -> httpx.Response:
     """Signs and sends a bundle to the Skip Relay.
 
     Args:
