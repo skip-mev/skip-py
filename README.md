@@ -1,6 +1,6 @@
 A helper library to sign and send bundles to the Skip Relay in Python.
 
-PyPi: https://pypi.org/project/skip-python/0.1.0/
+PyPi: https://pypi.org/project/skip-python/
 
 Github: https://github.com/skip-mev/skip-py
 
