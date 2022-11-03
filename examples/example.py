@@ -14,6 +14,11 @@ GRPC_URL  = "grpc+https://juno-grpc.lavenderfive.com:443/"
 SKIP_RPC_URL = "http://juno-1-api.skip.money/"
 ADDRESS_PREFIX = "juno"
 
+MIN_SEND_TX_FEE = "250ujuno"
+
+AUCTION_HOUSE_ADDRESS = "juno10g0l3hd9sau3vnjrayjhergcpxemucxcspgnn4"
+MIN_AUCTION_HOUSE_PAYMENT = 600
+
 # REQUIRES YOUR OWN MNEMONIC TO BE SET
 MNEMONIC = ""
 
@@ -40,9 +45,9 @@ def main():
     tx_bytes, encoded_tx = create_send_tx(client=client, 
                                           wallet=wallet, 
                                           denom="ujuno", 
-                                          amount=1, 
+                                          amount=MIN_AUCTION_HOUSE_PAYMENT, 
                                           from_address=str(wallet.address()), 
-                                          to_address="juno1dxays0mrk84uyr8ztr93e6ext9qutcgxhq5lvv", 
+                                          to_address=AUCTION_HOUSE_ADDRESS, 
                                           gas_limit=100000)
     
     # Sign and send bundle to Skip Relay
@@ -78,14 +83,11 @@ def create_send_tx(client,
     tx = Transaction()
     tx.add_message(msg_send)
 
-    # Set fee
-    fee = "0ujuno"
-
     # Get account
     account = client.query_account(str(wallet.address()))
 
     # Seal, Sign, and Complete Tx
-    tx.seal(signing_cfgs=[SigningCfg.direct(wallet.public_key(), account.sequence)], fee = fee, gas_limit=gas_limit)
+    tx.seal(signing_cfgs=[SigningCfg.direct(wallet.public_key(), account.sequence)], fee = MIN_SEND_TX_FEE, gas_limit=gas_limit)
     tx.sign(wallet.signer(), client.network_config.chain_id, account.number)
     tx.complete()
 
