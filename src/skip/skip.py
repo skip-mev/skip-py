@@ -40,7 +40,8 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
                 public_key: str, 
                 rpc_url: str, 
                 desired_height: int,
-                sync: bool) -> httpx.Response:
+                sync: bool,
+                timeout: float | None = 10) -> httpx.Response:
     """Sends a signed bundle to the Skip Relay.
 
     Args:
@@ -73,7 +74,7 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
             'id': 1}
 
     # Send post request to RPC with data, get response
-    response = httpx.post(rpc_url, json=data, timeout=10.0)
+    response = httpx.post(rpc_url, json=data, timeout=timeout)
     
     # Return response
     return response
@@ -84,7 +85,8 @@ def sign_and_send_bundle(bundle: list[bytes],
                          public_key: str, 
                          rpc_url: str, 
                          desired_height: int,
-                         sync: bool) -> httpx.Response:
+                         sync: bool,
+                         timeout: float | None = 10) -> httpx.Response:
     """Signs and sends a bundle to the Skip Relay.
 
     Args:
@@ -110,7 +112,8 @@ def sign_and_send_bundle(bundle: list[bytes],
                            public_key, 
                            rpc_url, 
                            desired_height, 
-                           sync)
+                           sync,
+                           timeout)
     
     # Return response
     return response
