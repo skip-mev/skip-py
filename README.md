@@ -101,7 +101,8 @@ send_bundle(b64_encoded_signed_bundle: list[str],
             public_key: str, 
             rpc_url: str, 
             desired_height: int, 
-            sync: bool) -> httpx.Response
+            sync: bool,
+            timeout: float | None = 10) -> httpx.Response
 """
 Args:
     b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
@@ -112,6 +113,8 @@ Args:
     desired_height (int): The desired height for the bundle to be included in. 
         Height of 0 can be used to include the bundle in the next block.
     sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+    timeout (float | None): Number of seconds to wait before throwing a read timeout error
+        for httpx. Default is 10 seconds.
 
 Returns:
     httpx.Response: The response from the Skip Relay.
@@ -128,7 +131,7 @@ sign_and_send_bundle(bundle: list[bytes],
                      public_key: str, 
                      rpc_url: str, 
                      desired_height: int,
-                     sync: bool) -> httpx.Response
+                     timeout: float | None = 10) -> httpx.Response
 """
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign.
@@ -139,6 +142,8 @@ Args:
     rpc_url (str): The URL of the Skip Relay RPC.
     desired_height (int): The desired height for the bundle to be included in.
     sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+    timeout (float | None): Number of seconds to wait before throwing a read timeout error
+        for httpx. Default is 10 seconds.
 
 Returns:
     str: The response from the Skip Relay.
