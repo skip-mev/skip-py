@@ -100,7 +100,7 @@ def sign_and_send_bundle(bundle: list[bytes],
         sync (bool): A flag to indicate if the broadcast should be synchronous or not.
 
     Returns:
-        str: The response from the Skip Relay.
+        httpx.Response: The response from the Skip Relay.
     """
     
     # Sign bundle
@@ -115,5 +115,34 @@ def sign_and_send_bundle(bundle: list[bytes],
                            sync,
                            timeout)
     
+    # Return response
+    return response
+
+
+def send_secure_transaction(transaction: str,
+                            rpc_url: str,
+                            timeout: float | None = 10) -> httpx.Response:
+    """
+    Sends a transaction through Skip Secure.
+
+    Args:
+        transaction (str): Base64 encoded signed transaction to send.
+        rpc_url (str): The URL of the Skip Secure RPC.
+        timeout (float | None): Number of seconds to wait before throwing a read timeout error
+        for httpx. Default is 10 seconds.
+
+    Returns:
+        httpx.Response: The response from Skip Secure.
+    """
+
+    # Create data parameter for RPC request
+    data = {'jsonrpc': '2.0',
+            'method': 'broadcast_secure_tx',
+            'params': [transaction],
+            'id': 1}
+
+    # Send post request to RPC with data, get response
+    response = httpx.post(rpc_url, json=data, timeout=timeout)
+
     # Return response
     return response
