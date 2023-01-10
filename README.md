@@ -68,10 +68,10 @@ import skip
 
 Alternatively, you can import specific functions to use like so:
 ``` python
-from skip import sign_bundle, send_bundle, sign_and_send_bundle
+from skip import sign_bundle, send_bundle, sign_and_send_bundle, send_secure_transaction
 ```
 
-This helper library exposes three functions: `sign_bundle`, `send_bundle`, and `sign_and_send_bundle`.
+This helper library exposes four functions: `sign_bundle`, `send_bundle`, `sign_and_send_bundle`, and `send_secure_transaction`.
 
 ## sign_bundle
 
@@ -146,6 +146,28 @@ Args:
         for httpx. Default is 10 seconds.
 
 Returns:
-    str: The response from the Skip Relay.
+    httpx.Response: The response from the Skip Relay.
+"""
+```
+
+## send_secure_transaction
+
+`send_secure_transaction` Sends a transaction securely through Skip Secure. The transaction's memo must be equal to the transaction sender address.
+
+``` python
+send_secure_transaction(transaction: bytes,
+                        rpc_url: str,
+                        timeout: float | None = 10) -> httpx.Response:
+"""
+Sends a transaction through Skip Secure.
+
+Args:
+    transaction (str): Base64 encoded signed transaction to send.
+    rpc_url (str): The URL of the Skip Secure RPC.
+    timeout (float | None): Number of seconds to wait before throwing a read timeout error
+    for httpx. Default is 10 seconds.
+
+Returns:
+    httpx.Response: The response from Skip Secure.
 """
 ```
