@@ -137,7 +137,7 @@ def send_secure_transaction(transaction: str,
 
     # Create data parameter for RPC request
     data = {'jsonrpc': '2.0',
-            'method': 'broadcast_secure_tx',
+            'method': 'broadcast_tx_sync',
             'params': [transaction],
             'id': 1}
 
