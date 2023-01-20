@@ -74,7 +74,7 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
             'id': 1}
 
     # Send post request to RPC with data, get response
-    response = httpx.post(rpc_url, json=data, timeout=timeout)
+    response = httpx.post(rpc_url, json=data, timeout=timeout, follow_redirects=True)
     
     # Return response
     return response
@@ -142,7 +142,7 @@ def send_secure_transaction(transaction: str,
             'id': 1}
 
     # Send post request to RPC with data, get response
-    response = httpx.post(rpc_url, json=data, timeout=timeout)
+    response = httpx.post(rpc_url, json=data, timeout=timeout, follow_redirects=True)
 
     # Return response
     return response
