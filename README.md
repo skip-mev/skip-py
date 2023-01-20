@@ -157,7 +157,7 @@ Returns:
 ``` python
 send_secure_transaction(transaction: bytes,
                         rpc_url: str,
-                        timeout: float | None = 10) -> httpx.Response:
+                        timeout: float | None = 10) -> httpx.Response
 """
 Sends a transaction through Skip Secure.
 
