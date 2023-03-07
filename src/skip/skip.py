@@ -41,7 +41,7 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
                 rpc_url: str, 
                 desired_height: int,
                 sync: bool,
-                timeout: float | None = 10) -> httpx.Response:
+                timeout: float | None = 30) -> httpx.Response:
     """Sends a signed bundle to the Skip Relay.
 
     Args:
@@ -79,6 +79,51 @@ def send_bundle(b64_encoded_signed_bundle: list[str],
     # Return response
     return response
 
+async def send_bundle_async(b64_encoded_signed_bundle: list[str], 
+                            bundle_signature: bytes, 
+                            public_key: str, 
+                            rpc_url: str, 
+                            desired_height: int,
+                            sync: bool,
+                            timeout: float | None = 30) -> httpx.Response:
+    """Sends a signed bundle to the Skip Relay asynchronously.
+
+    Args:
+        b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
+            The list of transaction must be in the order as the desired bundle.
+        bundle_signature (bytes): The signature applied to the bundle.
+        public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+        rpc_url (str): The URL of the Skip Relay RPC.
+        desired_height (int): The desired height for the bundle to be included in. 
+            Height of 0 can be used to include the bundle in the next block.
+        sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+    Returns:
+        httpx.Response: The response from the Skip Relay.
+    """
+    
+    # Choose broadcast method based on sync boolean
+    if sync:
+        method = 'broadcast_bundle_sync'
+    else:
+        method = 'broadcast_bundle_async'
+    
+    # Create data parameter for RPC request
+    data = {'jsonrpc': '2.0',
+            'method': method,
+            'params': [b64_encoded_signed_bundle, 
+                       str(desired_height), 
+                       public_key, 
+                       b64encode(bundle_signature).decode("utf-8")],
+            'id': 1}
+
+    # Send post request to RPC with data, get response
+    async with httpx.AsyncClient() as client:
+        response = await client.post(rpc_url, json=data, timeout=timeout, follow_redirects=True)
+    
+    # Return response
+    return response
+
 
 def sign_and_send_bundle(bundle: list[bytes], 
                          private_key: bytes, 
@@ -86,7 +131,7 @@ def sign_and_send_bundle(bundle: list[bytes],
                          rpc_url: str, 
                          desired_height: int,
                          sync: bool,
-                         timeout: float | None = 10) -> httpx.Response:
+                         timeout: float | None = 30) -> httpx.Response:
     """Signs and sends a bundle to the Skip Relay.
 
     Args:
@@ -114,6 +159,44 @@ def sign_and_send_bundle(bundle: list[bytes],
                            desired_height, 
                            sync,
                            timeout)
+    
+    # Return response
+    return response
+
+async def sign_and_send_bundle_async(bundle: list[bytes], 
+                                     private_key: bytes, 
+                                     public_key: str, 
+                                     rpc_url: str, 
+                                     desired_height: int,
+                                     sync: bool,
+                                     timeout: float | None = 30) -> httpx.Response:
+    """Signs and sends a bundle to the Skip Relay asynchronously.
+
+    Args:
+        bundle (list[bytes]): A list of transaction bytes to sign.
+            The list of transaction must be in the order as the desired bundle.
+            Transaction bytes can be obtained from mempool txs (tx) by applying base64.b64decode(tx)
+        private_key (bytes): The private key to sign the bundle with in bytes.
+        public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+        rpc_url (str): The URL of the Skip Relay RPC.
+        desired_height (int): The desired height for the bundle to be included in.
+        sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+
+    Returns:
+        httpx.Response: The response from the Skip Relay.
+    """
+    
+    # Sign bundle
+    b64_encoded_signed_bundle, bundle_signature = sign_bundle(bundle, private_key)
+    
+    # Send bundle
+    response = await send_bundle_async(b64_encoded_signed_bundle, 
+                                       bundle_signature, 
+                                       public_key, 
+                                       rpc_url, 
+                                       desired_height, 
+                                       sync,
+                                       timeout)
     
     # Return response
     return response
