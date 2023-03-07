@@ -68,10 +68,10 @@ import skip
 
 Alternatively, you can import specific functions to use like so:
 ``` python
-from skip import sign_bundle, send_bundle, sign_and_send_bundle, send_secure_transaction
+from skip import sign_bundle, send_bundle, sign_and_send_bundle, send_secure_transaction, send_bundle_async, sign_and_send_bundle_async
 ```
 
-This helper library exposes four functions: `sign_bundle`, `send_bundle`, `sign_and_send_bundle`, and `send_secure_transaction`.
+This helper library exposes six functions: `sign_bundle`, `send_bundle`, `sign_and_send_bundle`, `send_secure_transaction`, `send_bundle_async`, `sign_and_send_bundle_async`
 
 ## sign_bundle
 
@@ -102,7 +102,7 @@ send_bundle(b64_encoded_signed_bundle: list[str],
             rpc_url: str, 
             desired_height: int, 
             sync: bool,
-            timeout: float | None = 10) -> httpx.Response
+            timeout: float | None = 30) -> httpx.Response
 """
 Args:
     b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
@@ -131,7 +131,7 @@ sign_and_send_bundle(bundle: list[bytes],
                      public_key: str, 
                      rpc_url: str, 
                      desired_height: int,
-                     timeout: float | None = 10) -> httpx.Response
+                     timeout: float | None = 30) -> httpx.Response
 """
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign.
@@ -157,7 +157,7 @@ Returns:
 ``` python
 send_secure_transaction(transaction: bytes,
                         rpc_url: str,
-                        timeout: float | None = 10) -> httpx.Response
+                        timeout: float | None = 30) -> httpx.Response
 """
 Sends a transaction through Skip Secure.
 
@@ -169,5 +169,64 @@ Args:
 
 Returns:
     httpx.Response: The response from Skip Secure.
+"""
+```
+
+## send_bundle_async
+
+`send_bundle_async` Sends a signed bundle to the Skip Relay asynchronously
+
+``` python
+send_bundle(b64_encoded_signed_bundle: list[str], 
+            bundle_signature: bytes, 
+            public_key: str, 
+            rpc_url: str, 
+            desired_height: int, 
+            sync: bool,
+            timeout: float | None = 30) -> httpx.Response
+"""
+Args:
+    b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
+        The list of transaction must be in the order as the desired bundle.
+    bundle_signature (bytes): The signature applied to the bundle.
+    public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+    rpc_url (str): The URL of the Skip Relay RPC.
+    desired_height (int): The desired height for the bundle to be included in. 
+        Height of 0 can be used to include the bundle in the next block.
+    sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+    timeout (float | None): Number of seconds to wait before throwing a read timeout error
+        for httpx. Default is 10 seconds.
+
+Returns:
+    httpx.Response: The response from the Skip Relay.
+"""
+```
+
+## sign_and_send_bundle_async
+
+`sign_and_send_bundle` Signs and sends a bundle to the Skip Relay asynchronously (a wrapper function combining sign_bundle and send_bundle_async).
+
+``` python
+sign_and_send_bundle(bundle: list[bytes], 
+                     private_key: bytes, 
+                     public_key: str, 
+                     rpc_url: str, 
+                     desired_height: int,
+                     timeout: float | None = 30) -> httpx.Response
+"""
+Args:
+    bundle (list[bytes]): A list of transaction bytes to sign.
+        The list of transaction must be in the order as the desired bundle.
+        Transaction bytes can be obtained from mempool txs (tx) by applying base64.b64decode(tx)
+    private_key (bytes): The private key to sign the bundle with in bytes.
+    public_key (str): The base64 encoded public key of the private key used to sign the bundle.
+    rpc_url (str): The URL of the Skip Relay RPC.
+    desired_height (int): The desired height for the bundle to be included in.
+    sync (bool): A flag to indicate if the broadcast should be synchronous or not.
+    timeout (float | None): Number of seconds to wait before throwing a read timeout error
+        for httpx. Default is 10 seconds.
+
+Returns:
+    httpx.Response: The response from the Skip Relay.
 """
 ```
