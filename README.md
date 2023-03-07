@@ -177,13 +177,13 @@ Returns:
 `send_bundle_async` Sends a signed bundle to the Skip Relay asynchronously
 
 ``` python
-send_bundle(b64_encoded_signed_bundle: list[str], 
-            bundle_signature: bytes, 
-            public_key: str, 
-            rpc_url: str, 
-            desired_height: int, 
-            sync: bool,
-            timeout: float | None = 30) -> httpx.Response
+send_bundle_async(b64_encoded_signed_bundle: list[str], 
+                  bundle_signature: bytes, 
+                  public_key: str, 
+                  rpc_url: str, 
+                  desired_height: int, 
+                  sync: bool,
+                  timeout: float | None = 30) -> httpx.Response
 """
 Args:
     b64_encoded_signed_bundle (list[str]): A list of base64 encoded signed transactions.
@@ -204,15 +204,15 @@ Returns:
 
 ## sign_and_send_bundle_async
 
-`sign_and_send_bundle` Signs and sends a bundle to the Skip Relay asynchronously (a wrapper function combining sign_bundle and send_bundle_async).
+`sign_and_send_bundle_async` Signs and sends a bundle to the Skip Relay asynchronously (a wrapper function combining sign_bundle and send_bundle_async).
 
 ``` python
-sign_and_send_bundle(bundle: list[bytes], 
-                     private_key: bytes, 
-                     public_key: str, 
-                     rpc_url: str, 
-                     desired_height: int,
-                     timeout: float | None = 30) -> httpx.Response
+sign_and_send_bundle_async(bundle: list[bytes], 
+                           private_key: bytes, 
+                           public_key: str, 
+                           rpc_url: str, 
+                           desired_height: int,
+                           timeout: float | None = 30) -> httpx.Response
 """
 Args:
     bundle (list[bytes]): A list of transaction bytes to sign.
